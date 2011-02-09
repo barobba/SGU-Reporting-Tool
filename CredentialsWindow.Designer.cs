@@ -46,15 +46,18 @@
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonLogin
             // 
+            this.buttonLogin.Enabled = false;
             this.buttonLogin.Location = new System.Drawing.Point(182, 93);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(100, 30);
             this.buttonLogin.TabIndex = 3;
             this.buttonLogin.Text = "&Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // label1
             // 
@@ -71,6 +74,7 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(100, 20);
             this.textBoxUsername.TabIndex = 0;
+            this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsernamePassword_TextChanged);
             // 
             // textBoxPassword
             // 
@@ -79,6 +83,7 @@
             this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxPassword.TabIndex = 1;
             this.textBoxPassword.UseSystemPasswordChar = true;
+            this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxUsernamePassword_TextChanged);
             // 
             // label2
             // 
@@ -98,7 +103,7 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Password:";
             // 
-            // DBAccessWindow
+            // CredentialsWindow
             // 
             this.AcceptButton = this.buttonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -115,7 +120,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DBAccessWindow";
+            this.Name = "CredentialsWindow";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
