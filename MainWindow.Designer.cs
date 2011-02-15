@@ -39,6 +39,7 @@
             this.buttonIPEDVerify = new System.Windows.Forms.Button();
             this.backgroundWorkerAKIS = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerIPED = new System.ComponentModel.BackgroundWorker();
+            this.comboBoxAKISDate = new System.Windows.Forms.ComboBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageAKIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAKISSpinner)).BeginInit();
@@ -62,6 +63,7 @@
             // 
             // tabPageAKIS
             // 
+            this.tabPageAKIS.Controls.Add(this.comboBoxAKISDate);
             this.tabPageAKIS.Controls.Add(this.pictureBoxAKISSpinner);
             this.tabPageAKIS.Controls.Add(this.tableLayoutPanelAKIS);
             this.tabPageAKIS.Controls.Add(this.buttonAKISVerify);
@@ -103,7 +105,7 @@
             this.tableLayoutPanelAKIS.Name = "tableLayoutPanelAKIS";
             this.tableLayoutPanelAKIS.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelAKIS.RowCount = 1;
-            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 341F));
             this.tableLayoutPanelAKIS.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelAKIS.TabIndex = 1;
             // 
@@ -175,6 +177,15 @@
             this.buttonIPEDVerify.UseVisualStyleBackColor = true;
             this.buttonIPEDVerify.Click += new System.EventHandler(this.buttonIPEDVerify_Click);
             // 
+            // comboBoxAKISDate
+            // 
+            this.comboBoxAKISDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxAKISDate.FormattingEnabled = true;
+            this.comboBoxAKISDate.Location = new System.Drawing.Point(122, 18);
+            this.comboBoxAKISDate.Name = "comboBoxAKISDate";
+            this.comboBoxAKISDate.Size = new System.Drawing.Size(150, 21);
+            this.comboBoxAKISDate.TabIndex = 3;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +220,7 @@
         private System.Windows.Forms.PictureBox pictureBoxIPEDSpinner;
         private System.ComponentModel.BackgroundWorker backgroundWorkerAKIS;
         private System.ComponentModel.BackgroundWorker backgroundWorkerIPED;
+        private System.Windows.Forms.ComboBox comboBoxAKISDate;
     }
 }
 
