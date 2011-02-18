@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace SGU_Reporting_Tool
 {
     interface ITableLayoutRowItem
     {
-        public object controlAt(int column);
+        Control ControlAt(int column);
     }
 }

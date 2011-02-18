@@ -35,11 +35,11 @@
             this.buttonAKISVerify = new System.Windows.Forms.Button();
             this.tabPageIPED = new System.Windows.Forms.TabPage();
             this.pictureBoxIPEDSpinner = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanelIPED = new System.Windows.Forms.TableLayoutPanel();
             this.buttonIPEDVerify = new System.Windows.Forms.Button();
+            this.comboBoxAKISDate = new System.Windows.Forms.ComboBox();
             this.backgroundWorkerAKIS = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerIPED = new System.ComponentModel.BackgroundWorker();
-            this.comboBoxAKISDate = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanelIPED = new System.Windows.Forms.TableLayoutPanel();
             this.tabControlMain.SuspendLayout();
             this.tabPageAKIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAKISSpinner)).BeginInit();
@@ -55,22 +55,21 @@
             this.tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControlMain.Controls.Add(this.tabPageAKIS);
             this.tabControlMain.Controls.Add(this.tabPageIPED);
-            this.tabControlMain.Location = new System.Drawing.Point(12, 12);
+            this.tabControlMain.Location = new System.Drawing.Point(12, 39);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(450, 431);
+            this.tabControlMain.Size = new System.Drawing.Size(450, 430);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPageAKIS
             // 
-            this.tabPageAKIS.Controls.Add(this.comboBoxAKISDate);
             this.tabPageAKIS.Controls.Add(this.pictureBoxAKISSpinner);
             this.tabPageAKIS.Controls.Add(this.tableLayoutPanelAKIS);
             this.tabPageAKIS.Controls.Add(this.buttonAKISVerify);
             this.tabPageAKIS.Location = new System.Drawing.Point(4, 25);
             this.tabPageAKIS.Name = "tabPageAKIS";
             this.tabPageAKIS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAKIS.Size = new System.Drawing.Size(442, 402);
+            this.tabPageAKIS.Size = new System.Drawing.Size(442, 401);
             this.tabPageAKIS.TabIndex = 0;
             this.tabPageAKIS.Text = "AKIS";
             this.tabPageAKIS.UseVisualStyleBackColor = true;
@@ -81,9 +80,9 @@
             this.pictureBoxAKISSpinner.Enabled = false;
             this.pictureBoxAKISSpinner.Image = global::SGU_Reporting_Tool.Properties.Resources.ajax_activity_indicators_download_bigrotation2;
             this.pictureBoxAKISSpinner.InitialImage = null;
-            this.pictureBoxAKISSpinner.Location = new System.Drawing.Point(278, 11);
+            this.pictureBoxAKISSpinner.Location = new System.Drawing.Point(270, 6);
             this.pictureBoxAKISSpinner.Name = "pictureBoxAKISSpinner";
-            this.pictureBoxAKISSpinner.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxAKISSpinner.Size = new System.Drawing.Size(40, 40);
             this.pictureBoxAKISSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxAKISSpinner.TabIndex = 2;
             this.pictureBoxAKISSpinner.TabStop = false;
@@ -101,18 +100,18 @@
             this.tableLayoutPanelAKIS.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanelAKIS.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanelAKIS.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanelAKIS.Location = new System.Drawing.Point(6, 53);
+            this.tableLayoutPanelAKIS.Location = new System.Drawing.Point(6, 52);
             this.tableLayoutPanelAKIS.Name = "tableLayoutPanelAKIS";
             this.tableLayoutPanelAKIS.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelAKIS.RowCount = 1;
-            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 341F));
+            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 349F));
             this.tableLayoutPanelAKIS.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelAKIS.TabIndex = 1;
             // 
             // buttonAKISVerify
             // 
             this.buttonAKISVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAKISVerify.Location = new System.Drawing.Point(316, 7);
+            this.buttonAKISVerify.Location = new System.Drawing.Point(316, 6);
             this.buttonAKISVerify.Name = "buttonAKISVerify";
             this.buttonAKISVerify.Size = new System.Drawing.Size(120, 40);
             this.buttonAKISVerify.TabIndex = 0;
@@ -122,13 +121,13 @@
             // 
             // tabPageIPED
             // 
-            this.tabPageIPED.Controls.Add(this.pictureBoxIPEDSpinner);
             this.tabPageIPED.Controls.Add(this.tableLayoutPanelIPED);
+            this.tabPageIPED.Controls.Add(this.pictureBoxIPEDSpinner);
             this.tabPageIPED.Controls.Add(this.buttonIPEDVerify);
             this.tabPageIPED.Location = new System.Drawing.Point(4, 25);
             this.tabPageIPED.Name = "tabPageIPED";
             this.tabPageIPED.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIPED.Size = new System.Drawing.Size(442, 402);
+            this.tabPageIPED.Size = new System.Drawing.Size(442, 401);
             this.tabPageIPED.TabIndex = 1;
             this.tabPageIPED.Text = "IPED";
             this.tabPageIPED.UseVisualStyleBackColor = true;
@@ -139,37 +138,18 @@
             this.pictureBoxIPEDSpinner.Enabled = false;
             this.pictureBoxIPEDSpinner.Image = global::SGU_Reporting_Tool.Properties.Resources.ajax_activity_indicators_download_bigrotation2;
             this.pictureBoxIPEDSpinner.InitialImage = null;
-            this.pictureBoxIPEDSpinner.Location = new System.Drawing.Point(278, 11);
+            this.pictureBoxIPEDSpinner.Location = new System.Drawing.Point(270, 6);
             this.pictureBoxIPEDSpinner.Name = "pictureBoxIPEDSpinner";
-            this.pictureBoxIPEDSpinner.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxIPEDSpinner.Size = new System.Drawing.Size(40, 40);
             this.pictureBoxIPEDSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxIPEDSpinner.TabIndex = 3;
             this.pictureBoxIPEDSpinner.TabStop = false;
             this.pictureBoxIPEDSpinner.Visible = false;
             // 
-            // tableLayoutPanelIPED
-            // 
-            this.tableLayoutPanelIPED.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelIPED.AutoScroll = true;
-            this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tableLayoutPanelIPED.ColumnCount = 3;
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 53);
-            this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
-            this.tableLayoutPanelIPED.RowCount = 1;
-            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
-            this.tableLayoutPanelIPED.TabIndex = 2;
-            // 
             // buttonIPEDVerify
             // 
             this.buttonIPEDVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonIPEDVerify.Location = new System.Drawing.Point(316, 7);
+            this.buttonIPEDVerify.Location = new System.Drawing.Point(316, 6);
             this.buttonIPEDVerify.Name = "buttonIPEDVerify";
             this.buttonIPEDVerify.Size = new System.Drawing.Size(120, 40);
             this.buttonIPEDVerify.TabIndex = 0;
@@ -181,16 +161,45 @@
             // 
             this.comboBoxAKISDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBoxAKISDate.FormattingEnabled = true;
-            this.comboBoxAKISDate.Location = new System.Drawing.Point(122, 18);
+            this.comboBoxAKISDate.Location = new System.Drawing.Point(12, 12);
             this.comboBoxAKISDate.Name = "comboBoxAKISDate";
             this.comboBoxAKISDate.Size = new System.Drawing.Size(150, 21);
             this.comboBoxAKISDate.TabIndex = 3;
+            // 
+            // backgroundWorkerAKIS
+            // 
+            this.backgroundWorkerAKIS.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerAKIS_DoWork);
+            // 
+            // backgroundWorkerIPED
+            // 
+            this.backgroundWorkerIPED.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerIPED_DoWork);
+            // 
+            // tableLayoutPanelIPED
+            // 
+            this.tableLayoutPanelIPED.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelIPED.AutoScroll = true;
+            this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
+            this.tableLayoutPanelIPED.ColumnCount = 3;
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 52);
+            this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
+            this.tableLayoutPanelIPED.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.tableLayoutPanelIPED.RowCount = 1;
+            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
+            this.tableLayoutPanelIPED.TabIndex = 4;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 455);
+            this.ClientSize = new System.Drawing.Size(474, 481);
+            this.Controls.Add(this.comboBoxAKISDate);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -215,12 +224,12 @@
         private System.Windows.Forms.TabPage tabPageIPED;
         private System.Windows.Forms.Button buttonIPEDVerify;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAKIS;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelIPED;
         private System.Windows.Forms.PictureBox pictureBoxAKISSpinner;
         private System.Windows.Forms.PictureBox pictureBoxIPEDSpinner;
         private System.ComponentModel.BackgroundWorker backgroundWorkerAKIS;
         private System.ComponentModel.BackgroundWorker backgroundWorkerIPED;
         private System.Windows.Forms.ComboBox comboBoxAKISDate;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelIPED;
     }
 }
 
