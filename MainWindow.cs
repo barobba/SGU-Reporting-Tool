@@ -34,10 +34,32 @@ namespace SGU_Reporting_Tool
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            // Try to get the layouts to not show the horizontal scroll bar by default.
             tableLayoutPanelAKIS.PerformLayout();
             tableLayoutPanelIPED.PerformLayout();
 
-            // TODO: Populate the year/semester selection drop down.
+            // Populate the year/semester selection drop down.
+            int year = 2005;
+            int yearNext = year + 1;
+            while (year <= DateTime.Today.Year)
+            {
+                comboBoxYearTerm.Items.Add("Fall, " + year.ToString() + " (" + year.ToString() + "10)");
+                comboBoxYearTerm.Items.Add("Spring, " + yearNext.ToString() + " (" + year.ToString() + "20)");
+                if (year <= 2007)
+                {
+                    comboBoxYearTerm.Items.Add("Summer #1, " + yearNext.ToString() + " (" + year.ToString() + "30)");
+                    comboBoxYearTerm.Items.Add("Summer #2, " + yearNext.ToString() + " (" + year.ToString() + "40)");
+                }
+                else
+                {
+                    comboBoxYearTerm.Items.Add("Summer, " + yearNext.ToString() + " (" + year.ToString() + "50)");
+                }
+
+                year++;
+                yearNext++;
+            }
+
+            comboBoxYearTerm.SelectedIndex = comboBoxYearTerm.Items.Count - 6;
         }
 
         private void backgroundWorkerAKIS_DoWork(object sender, DoWorkEventArgs e)
@@ -54,8 +76,14 @@ namespace SGU_Reporting_Tool
             DialogResult rslt = Program.TryMakeSQLConnection();
             if (DialogResult.OK == rslt)
             {
-                // FIXME: Implement the drop down for available dates and grab it here.
-                Program.RunAKISVerify("201020", ref tableLayoutPanelAKIS);
+                string yearTermCode = "";
+                ComboBox comboBox = comboBoxYearTerm;
+                comboBox.Invoke(new MethodInvoker(delegate
+                {
+                    string itemStr = (comboBox.SelectedItem as string);
+                    yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
+                }));
+                Program.RunAKISVerify(yearTermCode, ref tableLayoutPanelAKIS);
             }
             else if(DialogResult.Abort == rslt)
             {
@@ -86,8 +114,14 @@ namespace SGU_Reporting_Tool
             DialogResult rslt = Program.TryMakeSQLConnection();
             if (DialogResult.OK == rslt)
             {
-                // FIXME: Implement the drop down for available dates and grab it here.
-                Program.RunIPEDVerify("201020", ref tableLayoutPanelIPED);
+                string yearTermCode = "";
+                ComboBox comboBox = comboBoxYearTerm;
+                comboBox.Invoke(new MethodInvoker(delegate
+                {
+                    string itemStr = (comboBox.SelectedItem as string);
+                    yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
+                }));
+                Program.RunIPEDVerify(yearTermCode, ref tableLayoutPanelIPED);
             }
             else if (DialogResult.Abort == rslt)
             {

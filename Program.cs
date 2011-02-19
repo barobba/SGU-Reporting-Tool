@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
@@ -20,6 +21,7 @@ namespace SGU_Reporting_Tool
         public const string ReportTable = "VerfToolReports";
         public const string StudTermSumDivTable = "stud_term_sum_div";
         public const string InfoMakerExecKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\im115.exe";
+        public const bool FakingSqlConn = false; // Debugging
 
         private static bool _hasSQLConnMade = false;
         private static SqlConnection _sqlConn = null;
@@ -63,29 +65,32 @@ namespace SGU_Reporting_Tool
             if (DialogResult.OK != window.ShowDialog())
                 return DialogResult.Cancel;
 
-            // U/n p/w in a read-only secured string at this point.
-            _sqlConnUsername = window.Username;
-            _sqlConnPassword = window.Password;
-            
-            IntPtr connUsername = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(_sqlConnUsername);
-            IntPtr connPassword = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(_sqlConnPassword);
-            string sqlConnStr = "user id=" + System.Runtime.InteropServices.Marshal.PtrToStringBSTR(connUsername) + ";" +
-                                "password=" + System.Runtime.InteropServices.Marshal.PtrToStringBSTR(connPassword) + ";" +
-                                "server=" + WorkingServer + ";" +
-                                "Trusted_Connection=yes;" +
-                                "database=" + WorkingDB + "; " +
-                                "connection timeout=30";
-            System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(connUsername);
-            System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(connPassword);
+            if (!FakingSqlConn)
+            {
+                // U/n p/w in a read-only secured string at this point.
+                _sqlConnUsername = window.Username;
+                _sqlConnPassword = window.Password;
 
-            _sqlConn = new SqlConnection(sqlConnStr);
-            try
-            {
-                _sqlConn.Open();
-            }
-            catch
-            {
-                return DialogResult.Abort;
+                IntPtr connUsername = Marshal.SecureStringToBSTR(_sqlConnUsername);
+                IntPtr connPassword = Marshal.SecureStringToBSTR(_sqlConnPassword);
+                string sqlConnStr = "user id=" + Marshal.PtrToStringBSTR(connUsername) + ";" +
+                                    "password=" + Marshal.PtrToStringBSTR(connPassword) + ";" +
+                                    "server=" + WorkingServer + ";" +
+                                    "Trusted_Connection=yes;" +
+                                    "database=" + WorkingDB + "; " +
+                                    "connection timeout=30";
+                Marshal.ZeroFreeBSTR(connUsername);
+                Marshal.ZeroFreeBSTR(connPassword);
+
+                _sqlConn = new SqlConnection(sqlConnStr);
+                try
+                {
+                    _sqlConn.Open();
+                }
+                catch
+                {
+                    return DialogResult.Abort;
+                }
             }
 
             _hasSQLConnMade = true;
