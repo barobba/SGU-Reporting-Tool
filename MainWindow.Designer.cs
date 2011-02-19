@@ -34,12 +34,13 @@
             this.tableLayoutPanelAKIS = new System.Windows.Forms.TableLayoutPanel();
             this.buttonAKISVerify = new System.Windows.Forms.Button();
             this.tabPageIPED = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanelIPED = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxIPEDSpinner = new System.Windows.Forms.PictureBox();
             this.buttonIPEDVerify = new System.Windows.Forms.Button();
-            this.comboBoxAKISDate = new System.Windows.Forms.ComboBox();
+            this.comboBoxYearTerm = new System.Windows.Forms.ComboBox();
             this.backgroundWorkerAKIS = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerIPED = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanelIPED = new System.Windows.Forms.TableLayoutPanel();
+            this.labelYearTerm = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageAKIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAKISSpinner)).BeginInit();
@@ -104,7 +105,7 @@
             this.tableLayoutPanelAKIS.Name = "tableLayoutPanelAKIS";
             this.tableLayoutPanelAKIS.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelAKIS.RowCount = 1;
-            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 351F));
             this.tableLayoutPanelAKIS.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelAKIS.TabIndex = 1;
             // 
@@ -132,6 +133,26 @@
             this.tabPageIPED.Text = "IPED";
             this.tabPageIPED.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanelIPED
+            // 
+            this.tableLayoutPanelIPED.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanelIPED.AutoScroll = true;
+            this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
+            this.tableLayoutPanelIPED.ColumnCount = 3;
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 52);
+            this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
+            this.tableLayoutPanelIPED.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.tableLayoutPanelIPED.RowCount = 1;
+            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 351F));
+            this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
+            this.tableLayoutPanelIPED.TabIndex = 4;
+            // 
             // pictureBoxIPEDSpinner
             // 
             this.pictureBoxIPEDSpinner.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -157,14 +178,14 @@
             this.buttonIPEDVerify.UseVisualStyleBackColor = true;
             this.buttonIPEDVerify.Click += new System.EventHandler(this.buttonIPEDVerify_Click);
             // 
-            // comboBoxAKISDate
+            // comboBoxYearTerm
             // 
-            this.comboBoxAKISDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBoxAKISDate.FormattingEnabled = true;
-            this.comboBoxAKISDate.Location = new System.Drawing.Point(12, 12);
-            this.comboBoxAKISDate.Name = "comboBoxAKISDate";
-            this.comboBoxAKISDate.Size = new System.Drawing.Size(150, 21);
-            this.comboBoxAKISDate.TabIndex = 3;
+            this.comboBoxYearTerm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxYearTerm.FormattingEnabled = true;
+            this.comboBoxYearTerm.Location = new System.Drawing.Point(312, 12);
+            this.comboBoxYearTerm.Name = "comboBoxYearTerm";
+            this.comboBoxYearTerm.Size = new System.Drawing.Size(150, 21);
+            this.comboBoxYearTerm.TabIndex = 3;
             // 
             // backgroundWorkerAKIS
             // 
@@ -174,32 +195,23 @@
             // 
             this.backgroundWorkerIPED.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerIPED_DoWork);
             // 
-            // tableLayoutPanelIPED
+            // labelYearTerm
             // 
-            this.tableLayoutPanelIPED.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelIPED.AutoScroll = true;
-            this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tableLayoutPanelIPED.ColumnCount = 3;
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 52);
-            this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
-            this.tableLayoutPanelIPED.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tableLayoutPanelIPED.RowCount = 1;
-            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 349F));
-            this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
-            this.tableLayoutPanelIPED.TabIndex = 4;
+            this.labelYearTerm.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelYearTerm.AutoSize = true;
+            this.labelYearTerm.Location = new System.Drawing.Point(198, 15);
+            this.labelYearTerm.Name = "labelYearTerm";
+            this.labelYearTerm.Size = new System.Drawing.Size(108, 13);
+            this.labelYearTerm.TabIndex = 4;
+            this.labelYearTerm.Text = "Year/Term Selection:";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 481);
-            this.Controls.Add(this.comboBoxAKISDate);
+            this.Controls.Add(this.labelYearTerm);
+            this.Controls.Add(this.comboBoxYearTerm);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -213,6 +225,7 @@
             this.tabPageIPED.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIPEDSpinner)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -228,8 +241,9 @@
         private System.Windows.Forms.PictureBox pictureBoxIPEDSpinner;
         private System.ComponentModel.BackgroundWorker backgroundWorkerAKIS;
         private System.ComponentModel.BackgroundWorker backgroundWorkerIPED;
-        private System.Windows.Forms.ComboBox comboBoxAKISDate;
+        private System.Windows.Forms.ComboBox comboBoxYearTerm;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelIPED;
+        private System.Windows.Forms.Label labelYearTerm;
     }
 }
 

@@ -18,7 +18,7 @@ namespace SGU_Reporting_Tool
         public const string WorkingServer = "jenzabardb";
         public const string WorkingDB = "TmsEPly";
         public const string ReportTable = "VerfToolReports";
-        public const string TableStudTermSumDiv = "stud_term_sum_div";
+        public const string StudTermSumDivTable = "stud_term_sum_div";
         public const string InfoMakerExecKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\im115.exe";
 
         private static bool _hasSQLConnMade = false;
@@ -35,7 +35,16 @@ namespace SGU_Reporting_Tool
 
             // Figure out info maker program executable location.
             RegistryKey rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
-            _infoMakerExecLoc = rk.GetValue(InfoMakerExecKey).ToString();
+            object rkValue = rk.GetValue(InfoMakerExecKey);
+
+            if (rkValue != null)
+            {
+                _infoMakerExecLoc = rkValue.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Cannot find InfoMaker executable location. Running of InfoMaker reports will not be available.", "Missing Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             Application.Run(new MainWindow());
         }
@@ -45,47 +54,59 @@ namespace SGU_Reporting_Tool
             get { return _infoMakerExecLoc; }
         }
 
-        public static bool TryMakeSQLConnection()
+        public static DialogResult TryMakeSQLConnection()
         {
             if (_hasSQLConnMade)
-                return true;
+                return DialogResult.OK;
 
             CredentialsWindow window = new CredentialsWindow();
             if (DialogResult.OK != window.ShowDialog())
-                return false;
+                return DialogResult.Cancel;
 
             // U/n p/w in a read-only secured string at this point.
             _sqlConnUsername = window.Username;
             _sqlConnPassword = window.Password;
+            
+            IntPtr connUsername = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(_sqlConnUsername);
+            IntPtr connPassword = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(_sqlConnPassword);
+            string sqlConnStr = "user id=" + System.Runtime.InteropServices.Marshal.PtrToStringBSTR(connUsername) + ";" +
+                                "password=" + System.Runtime.InteropServices.Marshal.PtrToStringBSTR(connPassword) + ";" +
+                                "server=" + WorkingServer + ";" +
+                                "Trusted_Connection=yes;" +
+                                "database=" + WorkingDB + "; " +
+                                "connection timeout=30";
+            System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(connUsername);
+            System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(connPassword);
 
-            _sqlConn = new SqlConnection("user id=" + _sqlConnUsername.ToString() + ";" +
-                                         "password=" + _sqlConnPassword.ToString() + ";" +
-                                         "server=" + WorkingServer + ";" +
-                                         "Trusted_Connection=yes;" +
-                                         "database=" + WorkingDB + "; " +
-                                         "connection timeout=30");
+            _sqlConn = new SqlConnection(sqlConnStr);
             try
             {
                 _sqlConn.Open();
             }
             catch
             {
-                return false;
+                return DialogResult.Abort;
             }
 
             _hasSQLConnMade = true;
-            return true;
+            return DialogResult.OK;
         }
 
         public static void RunAKISVerify(string yearTermCode, ref TableLayoutPanel tableLayoutPanelAKIS)
         {
+            // Need a local for the clojure below.
+            TableLayoutPanel panel = tableLayoutPanelAKIS;
+
             // Prep report factory for correct student totals.
             ReportFactory factory = new ReportFactory();
             factory.GetTotalStudentCount(yearTermCode, ref _sqlConn);
 
             // Delete current contents.
-            tableLayoutPanelAKIS.Controls.Clear();
-            tableLayoutPanelAKIS.RowStyles.Clear();
+            panel.Invoke(new MethodInvoker(delegate
+            {
+                panel.Controls.Clear();
+                panel.RowStyles.Clear();
+            }));
 
             // Grab reports listing.
             string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[dbo].[" +
@@ -98,32 +119,45 @@ namespace SGU_Reporting_Tool
             while (reader.Read())
             {
                 ITableLayoutRowItem rowItem = factory.NewReport(ref reader, ref _sqlConn);
-                tableLayoutPanelAKIS.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
-                tableLayoutPanelAKIS.Controls.Add(rowItem.ControlAt(0), 0, row);
-                tableLayoutPanelAKIS.Controls.Add(rowItem.ControlAt(1), 1, row);
-                tableLayoutPanelAKIS.Controls.Add(rowItem.ControlAt(2), 2, row);
+
+                panel.Invoke(new MethodInvoker(delegate
+                {
+                    panel.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
+                    panel.Controls.Add(rowItem.ControlAt(0), 0, row);
+                    panel.Controls.Add(rowItem.ControlAt(1), 1, row);
+                    panel.Controls.Add(rowItem.ControlAt(2), 2, row);
+                }));
                 row++;
             }
 
             // Add bottom spacer and set final layout.
-            tableLayoutPanelAKIS.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            tableLayoutPanelAKIS.RowCount = ++row;
-            tableLayoutPanelAKIS.PerformLayout();
-            tableLayoutPanelAKIS.VerticalScroll.Enabled = true;
-            tableLayoutPanelAKIS.VerticalScroll.Visible = true;
-            tableLayoutPanelAKIS.HorizontalScroll.Enabled = false;
-            tableLayoutPanelAKIS.HorizontalScroll.Visible = false;
+            panel.Invoke(new MethodInvoker(delegate
+            {
+                panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                panel.RowCount = ++row;
+                panel.PerformLayout();
+                panel.VerticalScroll.Enabled = true;
+                panel.VerticalScroll.Visible = true;
+                panel.HorizontalScroll.Enabled = false;
+                panel.HorizontalScroll.Visible = false;
+            }));
         }
 
         public static void RunIPEDVerify(string yearTermCode, ref TableLayoutPanel tableLayoutPanelIPED)
         {
+            // Need a local for the clojure below.
+            TableLayoutPanel panel = tableLayoutPanelIPED;
+
             // Prep report factory for correct student totals.
             ReportFactory factory = new ReportFactory();
             factory.GetTotalStudentCount(yearTermCode, ref _sqlConn);
 
             // Delete current contents.
-            tableLayoutPanelIPED.Controls.Clear();
-            tableLayoutPanelIPED.RowStyles.Clear();
+            panel.Invoke(new MethodInvoker(delegate
+            {
+                panel.Controls.Clear();
+                panel.RowStyles.Clear();
+            }));
 
             // Grab reports listing.
             string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[dbo].[" +
@@ -136,21 +170,28 @@ namespace SGU_Reporting_Tool
             while (reader.Read())
             {
                 ITableLayoutRowItem rowItem = factory.NewReport(ref reader, ref _sqlConn);
-                tableLayoutPanelIPED.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
-                tableLayoutPanelIPED.Controls.Add(rowItem.ControlAt(0), 0, row);
-                tableLayoutPanelIPED.Controls.Add(rowItem.ControlAt(1), 1, row);
-                tableLayoutPanelIPED.Controls.Add(rowItem.ControlAt(2), 2, row);
+
+                panel.Invoke(new MethodInvoker(delegate
+                {
+                    panel.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
+                    panel.Controls.Add(rowItem.ControlAt(0), 0, row);
+                    panel.Controls.Add(rowItem.ControlAt(1), 1, row);
+                    panel.Controls.Add(rowItem.ControlAt(2), 2, row);
+                }));
                 row++;
             }
 
             // Add bottom spacer and set final layout.
-            tableLayoutPanelIPED.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            tableLayoutPanelIPED.RowCount = ++row;
-            tableLayoutPanelIPED.PerformLayout();
-            tableLayoutPanelIPED.VerticalScroll.Enabled = true;
-            tableLayoutPanelIPED.VerticalScroll.Visible = true;
-            tableLayoutPanelIPED.HorizontalScroll.Enabled = false;
-            tableLayoutPanelIPED.HorizontalScroll.Visible = false;
+            panel.Invoke(new MethodInvoker(delegate
+            {
+                panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                panel.RowCount = ++row;
+                panel.PerformLayout();
+                panel.VerticalScroll.Enabled = true;
+                panel.VerticalScroll.Visible = true;
+                panel.HorizontalScroll.Enabled = false;
+                panel.HorizontalScroll.Visible = false;
+            }));
         }
     }
 }

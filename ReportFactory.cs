@@ -14,7 +14,7 @@ namespace SGU_Reporting_Tool
         public void GetTotalStudentCount(string yearSemesterCode, ref SqlConnection connection)
         {
             string cmdStr = "SELECT COUNT(*) FROM [" + Program.WorkingDB +
-                "].[dbo].[" + Program.TableStudTermSumDiv +
+                "].[dbo].[" + Program.StudTermSumDivTable +
                 "] WITH CONVERT(integer, [YR_CDE] + [TRM_CDE]) = " +
                 yearSemesterCode + ";";
             SqlCommand cmd = new SqlCommand(cmdStr);
@@ -33,7 +33,11 @@ namespace SGU_Reporting_Tool
                         cmd.Connection = connection;
                         int numMissing = cmd.ExecuteReader().GetInt32(0);
 
-                        VerificationReport rpt = new VerificationReport(reader["Title"].ToString(), numMissing, _numTotal, reader["Library"].ToString(), reader["Item"].ToString());
+                        VerificationReport rpt = new VerificationReport(
+                            reader["Title"].ToString(),
+                            numMissing, _numTotal,
+                            reader["Library"].ToString(),
+                            reader["Item"].ToString());
                         return rpt;
                     }
             }
