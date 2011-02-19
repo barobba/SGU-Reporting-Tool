@@ -76,7 +76,7 @@ namespace SGU_Reporting_Tool
                 string sqlConnStr = "user id=" + Marshal.PtrToStringBSTR(connUsername) + ";" +
                                     "password=" + Marshal.PtrToStringBSTR(connPassword) + ";" +
                                     "server=" + WorkingServer + ";" +
-                                    "Trusted_Connection=yes;" +
+                                    //"Trusted_Connection=yes;" +
                                     "database=" + WorkingDB + "; " +
                                     "connection timeout=30";
                 Marshal.ZeroFreeBSTR(connUsername);
@@ -135,6 +135,8 @@ namespace SGU_Reporting_Tool
                 row++;
             }
 
+            reader.Close();
+
             // Add bottom spacer and set final layout.
             panel.Invoke(new MethodInvoker(delegate
             {
@@ -185,6 +187,8 @@ namespace SGU_Reporting_Tool
                 }));
                 row++;
             }
+
+            reader.Close();
 
             // Add bottom spacer and set final layout.
             panel.Invoke(new MethodInvoker(delegate
