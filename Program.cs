@@ -18,7 +18,7 @@ namespace SGU_Reporting_Tool
         public const int TableLayoutRowHeight = 50;
         public const string WorkingServer = "jenzabardb";
         public const string WorkingDB = "TmsEPly";
-        public const string ReportTable = "VerfToolReports";
+        public const string ReportTable = "Verf_Tool_Reports";
         public const string StudTermSumDivTable = "stud_term_sum_div";
         public const string InfoMakerExecKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\im115.exe";
         public const bool FakingSqlConn = false; // Debugging
@@ -114,8 +114,8 @@ namespace SGU_Reporting_Tool
             }));
 
             // Grab reports listing.
-            string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[dbo].[" +
-                ReportTable + "] WHERE ReportDomain is \"AKIS\";";
+            string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
+                ReportTable + "] WHERE [Domain] = \"AKIS\";";
             SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
             sqlCmd.Connection = _sqlConn;
 
@@ -167,8 +167,8 @@ namespace SGU_Reporting_Tool
             }));
 
             // Grab reports listing.
-            string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[dbo].[" +
-                ReportTable + "] WHERE ReportDomain is \"IPED\";";
+            string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
+                ReportTable + "] WHERE [Domain] is \"IPED\";";
             SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
             sqlCmd.Connection = _sqlConn;
 

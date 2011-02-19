@@ -28,13 +28,17 @@ namespace SGU_Reporting_Tool
 
         public ITableLayoutRowItem NewReport(ref SqlDataReader reader, ref SqlConnection connection)
         {
-            switch (reader["ReportType"].ToString())
+            switch (reader["Type"].ToString())
             {
-                case "Verification":
+                case "Verify":
                     {
-                        SqlCommand cmd = new SqlCommand(reader["View"].ToString());
+                        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM " + reader["View"].ToString() + ";");
                         cmd.Connection = connection;
-                        int numMissing = cmd.ExecuteReader().GetInt32(0);
+                        SqlDataReader missingReader = cmd.ExecuteReader();
+                        int numMissing = _numTotal;
+                        if (missingReader.Read())
+                            numMissing = missingReader.GetInt32(0);
+                        missingReader.Close();
 
                         VerificationReport rpt = new VerificationReport(
                             reader["Title"].ToString(),
