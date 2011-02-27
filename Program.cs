@@ -38,7 +38,7 @@ namespace SGU_Reporting_Tool
             // Figure out info maker program executable location.
             RegistryKey rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
             object rkValue = rk.GetValue(InfoMakerExecKey);
-
+            
             if (rkValue != null)
             {
                 _infoMakerExecLoc = rkValue.ToString();
@@ -64,7 +64,7 @@ namespace SGU_Reporting_Tool
             CredentialsWindow window = new CredentialsWindow();
             if (DialogResult.OK != window.ShowDialog())
                 return DialogResult.Cancel;
-
+            
             if (!FakingSqlConn)
             {
                 // U/n p/w in a read-only secured string at this point.
@@ -123,7 +123,7 @@ namespace SGU_Reporting_Tool
             int row = 0;
             while (reader.Read())
             {
-                ITableLayoutRowItem rowItem = factory.NewReport(ref reader, ref _sqlConn);
+                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, ref reader, ref _sqlConn);
 
                 panel.Invoke(new MethodInvoker(delegate
                 {
@@ -131,6 +131,7 @@ namespace SGU_Reporting_Tool
                     panel.Controls.Add(rowItem.ControlAt(0), 0, row);
                     panel.Controls.Add(rowItem.ControlAt(1), 1, row);
                     panel.Controls.Add(rowItem.ControlAt(2), 2, row);
+                    panel.Controls.Add(rowItem.ControlAt(3), 3, row);
                 }));
                 row++;
             }
@@ -176,7 +177,7 @@ namespace SGU_Reporting_Tool
             int row = 0;
             while (reader.Read())
             {
-                ITableLayoutRowItem rowItem = factory.NewReport(ref reader, ref _sqlConn);
+                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, ref reader, ref _sqlConn);
 
                 panel.Invoke(new MethodInvoker(delegate
                 {

@@ -26,13 +26,21 @@ namespace SGU_Reporting_Tool
             reader.Close();
         }
 
-        public ITableLayoutRowItem NewReport(ref SqlDataReader reader, ref SqlConnection connection)
+        public ITableLayoutRowItem NewReport(string yearTermCode, ref SqlDataReader reader, ref SqlConnection connection)
         {
             switch (reader["Type"].ToString())
             {
-                case "Verify":
+                case "Verification":
                     {
-                        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM " + reader["View"].ToString() + ";");
+                        string verfCmd = reader["Command"].ToString();
+                        verfCmd = verfCmd.Replace("[TmsEPly]", "[" + Program.WorkingDB + "]");
+                        verfCmd = verfCmd.Replace(":From_Year", "'" + yearTermCode.Substring(0, 4) + "'");
+                        verfCmd = verfCmd.Replace(":To_Year", "'" + yearTermCode.Substring(0, 4) + "'");
+                        verfCmd = verfCmd.Replace(":Cutoff_Year", "'" + yearTermCode.Substring(0, 4) + "'");
+                        verfCmd = verfCmd.Replace(":From_Term", "'" + yearTermCode.Substring(4, 2) + "'");
+                        verfCmd = verfCmd.Replace(":To_Term", "'" + yearTermCode.Substring(4, 2) + "'");
+                        verfCmd = verfCmd.Replace(":Cutoff_Term", "'" + yearTermCode.Substring(4, 2) + "'");
+                        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM (" + verfCmd + ");");
                         cmd.Connection = connection;
                         SqlDataReader missingReader = cmd.ExecuteReader();
                         int numMissing = _numTotal;

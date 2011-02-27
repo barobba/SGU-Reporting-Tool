@@ -54,6 +54,17 @@ namespace SGU_Reporting_Tool
 
                 case 1:
                     {
+                        Label lbl = new Label();
+                        int perc = ((_numTotal - _numMiss) * 100) / (_numTotal * 100);
+                        lbl.Text = perc.ToString() + "%";
+                        lbl.TextAlign = ContentAlignment.MiddleCenter;
+                        lbl.Dock = DockStyle.Fill;
+
+                        return lbl;
+                    }
+
+                case 2:
+                    {
                         DisplayChart chrt = new DisplayChart();
                         chrt.MinValue = 0.0;
                         chrt.MaxValue = _numTotal;
@@ -62,7 +73,7 @@ namespace SGU_Reporting_Tool
                         return chrt;
                     }
 
-                case 2:
+                case 3:
                     {
                         Button btn = new Button();
                         btn.Text = "Open Verification";
