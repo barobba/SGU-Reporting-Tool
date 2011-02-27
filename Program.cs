@@ -37,7 +37,8 @@ namespace SGU_Reporting_Tool
 
             // Figure out info maker program executable location.
             RegistryKey rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
-            object rkValue = rk.GetValue(InfoMakerExecKey);
+            rk = rk.OpenSubKey(InfoMakerExecKey);
+            object rkValue = rk.GetValue("");
             
             if (rkValue != null)
             {
@@ -115,15 +116,33 @@ namespace SGU_Reporting_Tool
 
             // Grab reports listing.
             string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
-                ReportTable + "] WHERE [Domain] = \"AKIS\";";
+                ReportTable + "] WHERE [Domain] = 'AKIS';";
             SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
             sqlCmd.Connection = _sqlConn;
 
+            List<Dictionary<string, string>> reportItems = new List<Dictionary<string,string>>();
+
             SqlDataReader reader = sqlCmd.ExecuteReader();
-            int row = 0;
             while (reader.Read())
             {
-                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, ref reader, ref _sqlConn);
+                Dictionary<string, string> report = new Dictionary<string, string>(6);
+
+                report.Add("Type", reader["Type"].ToString());
+                report.Add("Command", reader["Command"].ToString());
+                report.Add("Title", reader["Title"].ToString());
+                report.Add("Library", reader["Library"].ToString());
+                report.Add("Item", reader["Item"].ToString());
+                report.Add("Other", reader["Other"].ToString());
+
+                reportItems.Add(report);
+            }
+
+            reader.Close();
+
+            int row = 0;
+            foreach(Dictionary<string,string> report in reportItems)
+            {
+                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, report, ref _sqlConn);
 
                 panel.Invoke(new MethodInvoker(delegate
                 {
@@ -135,8 +154,6 @@ namespace SGU_Reporting_Tool
                 }));
                 row++;
             }
-
-            reader.Close();
 
             // Add bottom spacer and set final layout.
             panel.Invoke(new MethodInvoker(delegate
@@ -169,15 +186,33 @@ namespace SGU_Reporting_Tool
 
             // Grab reports listing.
             string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
-                ReportTable + "] WHERE [Domain] is \"IPED\";";
+                ReportTable + "] WHERE [Domain] is 'IPED';";
             SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
             sqlCmd.Connection = _sqlConn;
 
+            List<Dictionary<string, string>> reportItems = new List<Dictionary<string, string>>();
+
             SqlDataReader reader = sqlCmd.ExecuteReader();
-            int row = 0;
             while (reader.Read())
             {
-                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, ref reader, ref _sqlConn);
+                Dictionary<string, string> report = new Dictionary<string, string>(6);
+
+                report.Add("Type", reader["Type"].ToString());
+                report.Add("Command", reader["Command"].ToString());
+                report.Add("Title", reader["Title"].ToString());
+                report.Add("Library", reader["Library"].ToString());
+                report.Add("Item", reader["Item"].ToString());
+                report.Add("Other", reader["Other"].ToString());
+
+                reportItems.Add(report);
+            }
+
+            reader.Close();
+
+            int row = 0;
+            foreach (Dictionary<string, string> report in reportItems)
+            {
+                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, report, ref _sqlConn);
 
                 panel.Invoke(new MethodInvoker(delegate
                 {
@@ -188,8 +223,6 @@ namespace SGU_Reporting_Tool
                 }));
                 row++;
             }
-
-            reader.Close();
 
             // Add bottom spacer and set final layout.
             panel.Invoke(new MethodInvoker(delegate

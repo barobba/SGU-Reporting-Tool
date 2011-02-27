@@ -15,7 +15,7 @@ namespace SGU_Reporting_Tool
         private double _maxValue;
         private double _currValue;
         private double _adjCurrValue;
-        private const double expBase = 0.25;    // The closer this number to zero, the more exponential scaling occurs.
+        private const double expBase = 0.995;    // The closer this number to zero, the more exponential scaling occurs.
 
         public DisplayChart()
         {

@@ -26,13 +26,13 @@ namespace SGU_Reporting_Tool
             reader.Close();
         }
 
-        public ITableLayoutRowItem NewReport(string yearTermCode, ref SqlDataReader reader, ref SqlConnection connection)
+        public ITableLayoutRowItem NewReport(string yearTermCode, Dictionary<string,string> report, ref SqlConnection connection)
         {
-            switch (reader["Type"].ToString())
+            switch (report["Type"].ToString())
             {
                 case "Verification":
                     {
-                        string verfCmd = reader["Command"].ToString();
+                        string verfCmd = report["Command"].ToString();
                         verfCmd = verfCmd.Replace("[TmsEPly]", "[" + Program.WorkingDB + "]");
                         verfCmd = verfCmd.Replace(":From_Year", "'" + yearTermCode.Substring(0, 4) + "'");
                         verfCmd = verfCmd.Replace(":To_Year", "'" + yearTermCode.Substring(0, 4) + "'");
@@ -40,19 +40,20 @@ namespace SGU_Reporting_Tool
                         verfCmd = verfCmd.Replace(":From_Term", "'" + yearTermCode.Substring(4, 2) + "'");
                         verfCmd = verfCmd.Replace(":To_Term", "'" + yearTermCode.Substring(4, 2) + "'");
                         verfCmd = verfCmd.Replace(":Cutoff_Term", "'" + yearTermCode.Substring(4, 2) + "'");
-                        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM (" + verfCmd + ");");
+                        SqlCommand cmd = new SqlCommand(verfCmd);
                         cmd.Connection = connection;
                         SqlDataReader missingReader = cmd.ExecuteReader();
-                        int numMissing = _numTotal;
-                        if (missingReader.Read())
-                            numMissing = missingReader.GetInt32(0);
+                        int numMissing = 0;
+                        while (missingReader.Read())
+                            ++numMissing;
                         missingReader.Close();
 
                         VerificationReport rpt = new VerificationReport(
-                            reader["Title"].ToString(),
+                            report["Title"].ToString(),
                             numMissing, _numTotal,
-                            reader["Library"].ToString(),
-                            reader["Item"].ToString());
+                            report["Library"].ToString(),
+                            report["Item"].ToString(),
+                            yearTermCode);
                         return rpt;
                     }
             }
