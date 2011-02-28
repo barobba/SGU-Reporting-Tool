@@ -15,7 +15,7 @@ namespace SGU_Reporting_Tool
         private double _maxValue;
         private double _currValue;
         private double _adjCurrValue;
-        private const double expBase = 0.995;    // The closer this number to zero, the more exponential scaling occurs.
+        private const double _expRaise = 1.1;
 
         public DisplayChart()
         {
@@ -30,7 +30,8 @@ namespace SGU_Reporting_Tool
             {
                 try
                 {
-                    _adjCurrValue = _currValue * ((Math.Pow(expBase, -(_currValue - _minValue) / (_maxValue - _minValue)) - Math.Pow(expBase, -0)) / (Math.Pow(expBase, -1) - Math.Pow(expBase, -0)));
+                    _adjCurrValue = _minValue + ((_currValue - _minValue) * (
+                        Math.Pow((_currValue - _minValue) / (_maxValue - _minValue), _expRaise)));
                 }
                 catch
                 {
@@ -86,7 +87,7 @@ namespace SGU_Reporting_Tool
                 double xTheta = (_adjCurrValue - _minValue) / (_maxValue - _minValue);
 
                 // Draw filled portions
-                Brush greenBrush = new SolidBrush(Color.Green);
+                Brush greenBrush = new SolidBrush(Color.ForestGreen);
                 graphicsObj.FillRectangle(greenBrush, 0, 0, (float)(this.Width * xTheta), this.Height);
                 Brush redBrush = new SolidBrush(Color.Red);
                 graphicsObj.FillRectangle(redBrush, (float)(this.Width * xTheta), 0, (float)(this.Width * (1.0 - xTheta)), this.Height);

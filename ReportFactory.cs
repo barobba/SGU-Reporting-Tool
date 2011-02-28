@@ -42,19 +42,28 @@ namespace SGU_Reporting_Tool
                         verfCmd = verfCmd.Replace(":Cutoff_Term", "'" + yearTermCode.Substring(4, 2) + "'");
                         SqlCommand cmd = new SqlCommand(verfCmd);
                         cmd.Connection = connection;
-                        SqlDataReader missingReader = cmd.ExecuteReader();
-                        int numMissing = 0;
-                        while (missingReader.Read())
-                            ++numMissing;
-                        missingReader.Close();
 
-                        VerificationReport rpt = new VerificationReport(
-                            report["Title"].ToString(),
-                            numMissing, _numTotal,
-                            report["Library"].ToString(),
-                            report["Item"].ToString(),
-                            yearTermCode);
-                        return rpt;
+                        try
+                        {
+                            SqlDataReader missingReader = cmd.ExecuteReader();
+                            int numMissing = 0;
+                            while (missingReader.Read())
+                                ++numMissing;
+                            missingReader.Close();
+
+                            VerificationReport rpt = new VerificationReport(
+                                report["Title"].ToString(),
+                                numMissing, _numTotal,
+                                report["Library"].ToString(),
+                                report["Item"].ToString(),
+                                yearTermCode);
+
+                            return rpt;
+                        }
+                        catch
+                        {
+                            return null;
+                        }
                     }
             }
 

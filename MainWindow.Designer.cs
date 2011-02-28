@@ -106,7 +106,7 @@
             this.tableLayoutPanelAKIS.Name = "tableLayoutPanelAKIS";
             this.tableLayoutPanelAKIS.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelAKIS.RowCount = 1;
-            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 353F));
+            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 355F));
             this.tableLayoutPanelAKIS.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelAKIS.TabIndex = 1;
             // 
@@ -142,15 +142,16 @@
             this.tableLayoutPanelIPED.AutoScroll = true;
             this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tableLayoutPanelIPED.ColumnCount = 3;
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanelIPED.ColumnCount = 4;
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 52);
             this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
             this.tableLayoutPanelIPED.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelIPED.RowCount = 1;
-            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 353F));
+            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 355F));
             this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelIPED.TabIndex = 4;
             // 

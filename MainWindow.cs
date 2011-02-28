@@ -83,7 +83,7 @@ namespace SGU_Reporting_Tool
                     string itemStr = (comboBox.SelectedItem as string);
                     yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
                 }));
-                Program.RunAKISVerify(yearTermCode, ref tableLayoutPanelAKIS);
+                Program.RunVerify("AKIS", yearTermCode, tableLayoutPanelAKIS);
             }
             else if(DialogResult.Abort == rslt)
             {
@@ -121,7 +121,7 @@ namespace SGU_Reporting_Tool
                     string itemStr = (comboBox.SelectedItem as string);
                     yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
                 }));
-                Program.RunIPEDVerify(yearTermCode, ref tableLayoutPanelIPED);
+                Program.RunVerify("IPED", yearTermCode, tableLayoutPanelIPED);
             }
             else if (DialogResult.Abort == rslt)
             {

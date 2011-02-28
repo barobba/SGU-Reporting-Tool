@@ -98,25 +98,22 @@ namespace SGU_Reporting_Tool
             return DialogResult.OK;
         }
 
-        public static void RunAKISVerify(string yearTermCode, ref TableLayoutPanel tableLayoutPanelAKIS)
+        public static void RunVerify(string domainCode, string yearTermCode, TableLayoutPanel tablePanel)
         {
-            // Need a local for the clojure below.
-            TableLayoutPanel panel = tableLayoutPanelAKIS;
-
             // Prep report factory for correct student totals.
             ReportFactory factory = new ReportFactory();
             factory.GetTotalStudentCount(yearTermCode, ref _sqlConn);
 
             // Delete current contents.
-            panel.Invoke(new MethodInvoker(delegate
+            tablePanel.Invoke(new MethodInvoker(delegate
             {
-                panel.Controls.Clear();
-                panel.RowStyles.Clear();
+                tablePanel.Controls.Clear();
+                tablePanel.RowStyles.Clear();
             }));
 
             // Grab reports listing.
             string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
-                ReportTable + "] WHERE [Domain] = 'AKIS';";
+                ReportTable + "] WHERE [Domain] = '" + domainCode + "';";
             SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
             sqlCmd.Connection = _sqlConn;
 
@@ -127,113 +124,59 @@ namespace SGU_Reporting_Tool
             {
                 Dictionary<string, string> report = new Dictionary<string, string>(6);
 
-                report.Add("Type", reader["Type"].ToString());
-                report.Add("Command", reader["Command"].ToString());
-                report.Add("Title", reader["Title"].ToString());
-                report.Add("Library", reader["Library"].ToString());
-                report.Add("Item", reader["Item"].ToString());
-                report.Add("Other", reader["Other"].ToString());
+                if (report != null)
+                {
+                    report.Add("Type", reader["Type"].ToString());
+                    report.Add("Command", reader["Command"].ToString());
+                    report.Add("Title", reader["Title"].ToString());
+                    report.Add("Library", reader["Library"].ToString());
+                    report.Add("Item", reader["Item"].ToString());
+                    report.Add("Other", reader["Other"].ToString());
 
-                reportItems.Add(report);
+                    reportItems.Add(report);
+                }
+                else
+                {
+                    MessageBox.Show("Failure executing query for " + domainCode + " item " + reader["Item"].ToString() + ". Please contact technical support.", "Failure Running Report", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             reader.Close();
 
             int row = 0;
-            foreach(Dictionary<string,string> report in reportItems)
+            if (reportItems.Count > 0)
             {
-                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, report, ref _sqlConn);
-
-                panel.Invoke(new MethodInvoker(delegate
+                foreach (Dictionary<string, string> report in reportItems)
                 {
-                    panel.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
-                    panel.Controls.Add(rowItem.ControlAt(0), 0, row);
-                    panel.Controls.Add(rowItem.ControlAt(1), 1, row);
-                    panel.Controls.Add(rowItem.ControlAt(2), 2, row);
-                    panel.Controls.Add(rowItem.ControlAt(3), 3, row);
-                }));
-                row++;
+                    ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, report, ref _sqlConn);
+
+                    tablePanel.Invoke(new MethodInvoker(delegate
+                    {
+                        tablePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
+                        tablePanel.Controls.Add(rowItem.ControlAt(0), 0, row);
+                        tablePanel.Controls.Add(rowItem.ControlAt(1), 1, row);
+                        tablePanel.Controls.Add(rowItem.ControlAt(2), 2, row);
+                        tablePanel.Controls.Add(rowItem.ControlAt(3), 3, row);
+                    }));
+                    row++;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No " + domainCode + " verification reports were found or processed in database. Please contact technical support for more information.", "No Available Reports", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             // Add bottom spacer and set final layout.
-            panel.Invoke(new MethodInvoker(delegate
+            tablePanel.Invoke(new MethodInvoker(delegate
             {
-                panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                panel.RowCount = ++row;
-                panel.PerformLayout();
-                panel.VerticalScroll.Enabled = true;
-                panel.VerticalScroll.Visible = true;
-                panel.HorizontalScroll.Enabled = false;
-                panel.HorizontalScroll.Visible = false;
-            }));
-        }
-
-        public static void RunIPEDVerify(string yearTermCode, ref TableLayoutPanel tableLayoutPanelIPED)
-        {
-            // Need a local for the clojure below.
-            TableLayoutPanel panel = tableLayoutPanelIPED;
-
-            // Prep report factory for correct student totals.
-            ReportFactory factory = new ReportFactory();
-            factory.GetTotalStudentCount(yearTermCode, ref _sqlConn);
-
-            // Delete current contents.
-            panel.Invoke(new MethodInvoker(delegate
-            {
-                panel.Controls.Clear();
-                panel.RowStyles.Clear();
-            }));
-
-            // Grab reports listing.
-            string sqlCmdStr = "SELECT * FROM [" + WorkingDB + "].[barobba].[" +
-                ReportTable + "] WHERE [Domain] is 'IPED';";
-            SqlCommand sqlCmd = new SqlCommand(sqlCmdStr);
-            sqlCmd.Connection = _sqlConn;
-
-            List<Dictionary<string, string>> reportItems = new List<Dictionary<string, string>>();
-
-            SqlDataReader reader = sqlCmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Dictionary<string, string> report = new Dictionary<string, string>(6);
-
-                report.Add("Type", reader["Type"].ToString());
-                report.Add("Command", reader["Command"].ToString());
-                report.Add("Title", reader["Title"].ToString());
-                report.Add("Library", reader["Library"].ToString());
-                report.Add("Item", reader["Item"].ToString());
-                report.Add("Other", reader["Other"].ToString());
-
-                reportItems.Add(report);
-            }
-
-            reader.Close();
-
-            int row = 0;
-            foreach (Dictionary<string, string> report in reportItems)
-            {
-                ITableLayoutRowItem rowItem = factory.NewReport(yearTermCode, report, ref _sqlConn);
-
-                panel.Invoke(new MethodInvoker(delegate
-                {
-                    panel.RowStyles.Add(new RowStyle(SizeType.Absolute, TableLayoutRowHeight));
-                    panel.Controls.Add(rowItem.ControlAt(0), 0, row);
-                    panel.Controls.Add(rowItem.ControlAt(1), 1, row);
-                    panel.Controls.Add(rowItem.ControlAt(2), 2, row);
-                }));
-                row++;
-            }
-
-            // Add bottom spacer and set final layout.
-            panel.Invoke(new MethodInvoker(delegate
-            {
-                panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                panel.RowCount = ++row;
-                panel.PerformLayout();
-                panel.VerticalScroll.Enabled = true;
-                panel.VerticalScroll.Visible = true;
-                panel.HorizontalScroll.Enabled = false;
-                panel.HorizontalScroll.Visible = false;
+                tablePanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                tablePanel.RowCount = ++row;
+                tablePanel.PerformLayout();
+                tablePanel.VerticalScroll.Enabled = true;
+                tablePanel.VerticalScroll.Visible = true;
+                tablePanel.HorizontalScroll.Enabled = false;
+                tablePanel.HorizontalScroll.Visible = false;
+                tablePanel.Refresh();
             }));
         }
     }
