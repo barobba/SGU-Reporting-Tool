@@ -17,7 +17,7 @@ namespace SGU_Reporting_Tool
     {
         public const int TableLayoutRowHeight = 50;
         public const string WorkingServer = "jenzabardb";
-        public const string WorkingDB = "TmsEPly";
+        public const string WorkingDB = "TmsEPrd";
         public const string ReportTable = "Verf_Tool_Reports";
         public const string StudTermSumDivTable = "stud_term_sum_div";
         public const string InfoMakerExecKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\im115.exe";
