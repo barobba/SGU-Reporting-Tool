@@ -26,17 +26,17 @@ namespace SGU_Reporting_Tool
                 backgroundWorkerAKIS.RunWorkerAsync();
         }
 
-        private void buttonIPEDVerify_Click(object sender, EventArgs e)
+        private void buttonGeneralVerify_Click(object sender, EventArgs e)
         {
-            if (!backgroundWorkerIPED.IsBusy)
-                backgroundWorkerIPED.RunWorkerAsync();
+            if (!backgroundWorkerGeneral.IsBusy)
+                backgroundWorkerGeneral.RunWorkerAsync();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
             // Try to get the layouts to not show the horizontal scroll bar by default.
             tableLayoutPanelAKIS.PerformLayout();
-            tableLayoutPanelIPED.PerformLayout();
+            tableLayoutPanelGeneral.PerformLayout();
 
             // Populate the year/semester selection drop down.
             int year = 2005;
@@ -65,9 +65,12 @@ namespace SGU_Reporting_Tool
         private void backgroundWorkerAKIS_DoWork(object sender, DoWorkEventArgs e)
         {
             // Enable spinner, dis-engage verify button, dis-engage yr/sem drop down.
-            pictureBoxAKISSpinner.Invoke(new MethodInvoker(delegate { pictureBoxAKISSpinner.Enabled = true; }));
-            pictureBoxAKISSpinner.Invoke(new MethodInvoker(delegate { pictureBoxAKISSpinner.Visible = true; }));
-            buttonAKISVerify.Invoke(new MethodInvoker(delegate { buttonAKISVerify.Enabled = false; }));
+            tableLayoutPanelAKIS.Invoke(new MethodInvoker(delegate {
+                pictureBoxAKISSpinner.Enabled = true;
+                progressBarAKIS.Value = 0;
+                tableLayoutPanelAKIS.Visible = false;
+                buttonAKISVerify.Enabled = false;
+            }));
             _numVersLock.WaitOne();
             if (_numVersRunning++ == 0)
                 comboBoxYearTerm.Invoke(new MethodInvoker(delegate { comboBoxYearTerm.Enabled = false; }));
@@ -83,7 +86,7 @@ namespace SGU_Reporting_Tool
                     string itemStr = (comboBox.SelectedItem as string);
                     yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
                 }));
-                Program.RunVerify("AKIS", yearTermCode, tableLayoutPanelAKIS);
+                Program.RunVerify("AKIS", yearTermCode, tableLayoutPanelAKIS, progressBarAKIS);
             }
             else if(DialogResult.Abort == rslt)
             {
@@ -91,21 +94,29 @@ namespace SGU_Reporting_Tool
             }
 
             // Disable spinner, re-engage verify button, re-engage yr/sem drop down.
-            pictureBoxAKISSpinner.Invoke(new MethodInvoker(delegate { pictureBoxAKISSpinner.Enabled = false; }));
-            pictureBoxAKISSpinner.Invoke(new MethodInvoker(delegate { pictureBoxAKISSpinner.Visible = false; }));
-            buttonAKISVerify.Invoke(new MethodInvoker(delegate { buttonAKISVerify.Enabled = true; }));
+            tableLayoutPanelAKIS.Invoke(new MethodInvoker(delegate
+            {
+                pictureBoxAKISSpinner.Enabled = false;
+                progressBarAKIS.Value = 100;
+                tableLayoutPanelAKIS.Visible = true;
+                buttonAKISVerify.Enabled = true;
+            }));
             _numVersLock.WaitOne();
             if (--_numVersRunning == 0)
                 comboBoxYearTerm.Invoke(new MethodInvoker(delegate { comboBoxYearTerm.Enabled = true; }));
             _numVersLock.ReleaseMutex();
         }
 
-        private void backgroundWorkerIPED_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerGeneral_DoWork(object sender, DoWorkEventArgs e)
         {
             // Enable spinner, dis-engage verify button, dis-engage yr/sem drop down.
-            pictureBoxIPEDSpinner.Invoke(new MethodInvoker(delegate { pictureBoxIPEDSpinner.Enabled = true; }));
-            pictureBoxIPEDSpinner.Invoke(new MethodInvoker(delegate { pictureBoxIPEDSpinner.Visible = true; }));
-            buttonIPEDVerify.Invoke(new MethodInvoker(delegate { buttonIPEDVerify.Enabled = false; }));
+            tableLayoutPanelGeneral.Invoke(new MethodInvoker(delegate
+            {
+                pictureBoxGeneralSpinner.Enabled = true;
+                progressBarGeneral.Value = 0;
+                tableLayoutPanelGeneral.Visible = false;
+                buttonGeneralVerify.Enabled = false;
+            }));
             _numVersLock.WaitOne();
             if (_numVersRunning++ == 0)
                 comboBoxYearTerm.Invoke(new MethodInvoker(delegate { comboBoxYearTerm.Enabled = false; }));
@@ -121,7 +132,7 @@ namespace SGU_Reporting_Tool
                     string itemStr = (comboBox.SelectedItem as string);
                     yearTermCode = itemStr.Substring(itemStr.Length - 7, 6);
                 }));
-                Program.RunVerify("IPED", yearTermCode, tableLayoutPanelIPED);
+                Program.RunVerify("General", yearTermCode, tableLayoutPanelGeneral, progressBarGeneral);
             }
             else if (DialogResult.Abort == rslt)
             {
@@ -129,9 +140,13 @@ namespace SGU_Reporting_Tool
             }
 
             // Disable spinner, re-engage verify button, re-engage yr/sem drop down.
-            pictureBoxIPEDSpinner.Invoke(new MethodInvoker(delegate { pictureBoxIPEDSpinner.Enabled = false; }));
-            pictureBoxIPEDSpinner.Invoke(new MethodInvoker(delegate { pictureBoxIPEDSpinner.Visible = false; }));
-            buttonIPEDVerify.Invoke(new MethodInvoker(delegate { buttonIPEDVerify.Enabled = true; }));
+            tableLayoutPanelGeneral.Invoke(new MethodInvoker(delegate
+            {
+                pictureBoxGeneralSpinner.Enabled = false;
+                progressBarGeneral.Value = 100;
+                tableLayoutPanelGeneral.Visible = true;
+                buttonGeneralVerify.Enabled = true;
+            }));
             _numVersLock.WaitOne();
             if (--_numVersRunning == 0)
                 comboBoxYearTerm.Invoke(new MethodInvoker(delegate { comboBoxYearTerm.Enabled = true; }));

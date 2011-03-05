@@ -28,24 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageAKIS = new System.Windows.Forms.TabPage();
             this.pictureBoxAKISSpinner = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelAKIS = new System.Windows.Forms.TableLayoutPanel();
             this.buttonAKISVerify = new System.Windows.Forms.Button();
-            this.tabPageIPED = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanelIPED = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxIPEDSpinner = new System.Windows.Forms.PictureBox();
-            this.buttonIPEDVerify = new System.Windows.Forms.Button();
+            this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanelGeneral = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxGeneralSpinner = new System.Windows.Forms.PictureBox();
+            this.buttonGeneralVerify = new System.Windows.Forms.Button();
             this.comboBoxYearTerm = new System.Windows.Forms.ComboBox();
             this.backgroundWorkerAKIS = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorkerIPED = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerGeneral = new System.ComponentModel.BackgroundWorker();
             this.labelYearTerm = new System.Windows.Forms.Label();
+            this.progressBarAKIS = new System.Windows.Forms.ProgressBar();
+            this.labelAKISRun = new System.Windows.Forms.Label();
+            this.labelGeneralRun = new System.Windows.Forms.Label();
+            this.progressBarGeneral = new System.Windows.Forms.ProgressBar();
             this.tabControlMain.SuspendLayout();
             this.tabPageAKIS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAKISSpinner)).BeginInit();
-            this.tabPageIPED.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIPEDSpinner)).BeginInit();
+            this.tabPageGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGeneralSpinner)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -55,7 +60,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tabControlMain.Controls.Add(this.tabPageAKIS);
-            this.tabControlMain.Controls.Add(this.tabPageIPED);
+            this.tabControlMain.Controls.Add(this.tabPageGeneral);
             this.tabControlMain.Location = new System.Drawing.Point(12, 39);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -64,8 +69,10 @@
             // 
             // tabPageAKIS
             // 
-            this.tabPageAKIS.Controls.Add(this.pictureBoxAKISSpinner);
             this.tabPageAKIS.Controls.Add(this.tableLayoutPanelAKIS);
+            this.tabPageAKIS.Controls.Add(this.labelAKISRun);
+            this.tabPageAKIS.Controls.Add(this.pictureBoxAKISSpinner);
+            this.tabPageAKIS.Controls.Add(this.progressBarAKIS);
             this.tabPageAKIS.Controls.Add(this.buttonAKISVerify);
             this.tabPageAKIS.Location = new System.Drawing.Point(4, 25);
             this.tabPageAKIS.Name = "tabPageAKIS";
@@ -77,17 +84,16 @@
             // 
             // pictureBoxAKISSpinner
             // 
-            this.pictureBoxAKISSpinner.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBoxAKISSpinner.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBoxAKISSpinner.Enabled = false;
             this.pictureBoxAKISSpinner.Image = global::SGU_Reporting_Tool.Properties.Resources.ajax_activity_indicators_download_bigrotation2;
             this.pictureBoxAKISSpinner.InitialImage = null;
-            this.pictureBoxAKISSpinner.Location = new System.Drawing.Point(270, 6);
+            this.pictureBoxAKISSpinner.Location = new System.Drawing.Point(197, 141);
             this.pictureBoxAKISSpinner.Name = "pictureBoxAKISSpinner";
             this.pictureBoxAKISSpinner.Size = new System.Drawing.Size(40, 40);
             this.pictureBoxAKISSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxAKISSpinner.TabIndex = 2;
             this.pictureBoxAKISSpinner.TabStop = false;
-            this.pictureBoxAKISSpinner.Visible = false;
             // 
             // tableLayoutPanelAKIS
             // 
@@ -106,7 +112,7 @@
             this.tableLayoutPanelAKIS.Name = "tableLayoutPanelAKIS";
             this.tableLayoutPanelAKIS.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.tableLayoutPanelAKIS.RowCount = 1;
-            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tableLayoutPanelAKIS.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 359F));
             this.tableLayoutPanelAKIS.Size = new System.Drawing.Size(430, 343);
             this.tableLayoutPanelAKIS.TabIndex = 1;
             // 
@@ -121,64 +127,65 @@
             this.buttonAKISVerify.UseVisualStyleBackColor = true;
             this.buttonAKISVerify.Click += new System.EventHandler(this.buttonAKISVerify_Click);
             // 
-            // tabPageIPED
+            // tabPageGeneral
             // 
-            this.tabPageIPED.Controls.Add(this.tableLayoutPanelIPED);
-            this.tabPageIPED.Controls.Add(this.pictureBoxIPEDSpinner);
-            this.tabPageIPED.Controls.Add(this.buttonIPEDVerify);
-            this.tabPageIPED.Location = new System.Drawing.Point(4, 25);
-            this.tabPageIPED.Name = "tabPageIPED";
-            this.tabPageIPED.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIPED.Size = new System.Drawing.Size(442, 401);
-            this.tabPageIPED.TabIndex = 1;
-            this.tabPageIPED.Text = "IPED";
-            this.tabPageIPED.UseVisualStyleBackColor = true;
+            this.tabPageGeneral.Controls.Add(this.tableLayoutPanelGeneral);
+            this.tabPageGeneral.Controls.Add(this.labelGeneralRun);
+            this.tabPageGeneral.Controls.Add(this.progressBarGeneral);
+            this.tabPageGeneral.Controls.Add(this.pictureBoxGeneralSpinner);
+            this.tabPageGeneral.Controls.Add(this.buttonGeneralVerify);
+            this.tabPageGeneral.Location = new System.Drawing.Point(4, 25);
+            this.tabPageGeneral.Name = "tabPageGeneral";
+            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGeneral.Size = new System.Drawing.Size(442, 401);
+            this.tabPageGeneral.TabIndex = 1;
+            this.tabPageGeneral.Text = "General";
+            this.tabPageGeneral.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanelIPED
+            // tableLayoutPanelGeneral
             // 
-            this.tableLayoutPanelIPED.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.tableLayoutPanelGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelIPED.AutoScroll = true;
-            this.tableLayoutPanelIPED.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanelIPED.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tableLayoutPanelIPED.ColumnCount = 4;
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanelIPED.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanelIPED.Location = new System.Drawing.Point(6, 52);
-            this.tableLayoutPanelIPED.Name = "tableLayoutPanelIPED";
-            this.tableLayoutPanelIPED.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tableLayoutPanelIPED.RowCount = 1;
-            this.tableLayoutPanelIPED.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 355F));
-            this.tableLayoutPanelIPED.Size = new System.Drawing.Size(430, 343);
-            this.tableLayoutPanelIPED.TabIndex = 4;
+            this.tableLayoutPanelGeneral.AutoScroll = true;
+            this.tableLayoutPanelGeneral.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanelGeneral.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
+            this.tableLayoutPanelGeneral.ColumnCount = 4;
+            this.tableLayoutPanelGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanelGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanelGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanelGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelGeneral.Location = new System.Drawing.Point(6, 52);
+            this.tableLayoutPanelGeneral.Name = "tableLayoutPanelGeneral";
+            this.tableLayoutPanelGeneral.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.tableLayoutPanelGeneral.RowCount = 1;
+            this.tableLayoutPanelGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 359F));
+            this.tableLayoutPanelGeneral.Size = new System.Drawing.Size(430, 343);
+            this.tableLayoutPanelGeneral.TabIndex = 4;
             // 
-            // pictureBoxIPEDSpinner
+            // pictureBoxGeneralSpinner
             // 
-            this.pictureBoxIPEDSpinner.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBoxIPEDSpinner.Enabled = false;
-            this.pictureBoxIPEDSpinner.Image = global::SGU_Reporting_Tool.Properties.Resources.ajax_activity_indicators_download_bigrotation2;
-            this.pictureBoxIPEDSpinner.InitialImage = null;
-            this.pictureBoxIPEDSpinner.Location = new System.Drawing.Point(270, 6);
-            this.pictureBoxIPEDSpinner.Name = "pictureBoxIPEDSpinner";
-            this.pictureBoxIPEDSpinner.Size = new System.Drawing.Size(40, 40);
-            this.pictureBoxIPEDSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxIPEDSpinner.TabIndex = 3;
-            this.pictureBoxIPEDSpinner.TabStop = false;
-            this.pictureBoxIPEDSpinner.Visible = false;
+            this.pictureBoxGeneralSpinner.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBoxGeneralSpinner.Enabled = false;
+            this.pictureBoxGeneralSpinner.Image = global::SGU_Reporting_Tool.Properties.Resources.ajax_activity_indicators_download_bigrotation2;
+            this.pictureBoxGeneralSpinner.InitialImage = null;
+            this.pictureBoxGeneralSpinner.Location = new System.Drawing.Point(197, 141);
+            this.pictureBoxGeneralSpinner.Name = "pictureBoxGeneralSpinner";
+            this.pictureBoxGeneralSpinner.Size = new System.Drawing.Size(40, 40);
+            this.pictureBoxGeneralSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxGeneralSpinner.TabIndex = 3;
+            this.pictureBoxGeneralSpinner.TabStop = false;
             // 
-            // buttonIPEDVerify
+            // buttonGeneralVerify
             // 
-            this.buttonIPEDVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonIPEDVerify.Location = new System.Drawing.Point(316, 6);
-            this.buttonIPEDVerify.Name = "buttonIPEDVerify";
-            this.buttonIPEDVerify.Size = new System.Drawing.Size(120, 40);
-            this.buttonIPEDVerify.TabIndex = 0;
-            this.buttonIPEDVerify.Text = "&Run Verifications";
-            this.buttonIPEDVerify.UseVisualStyleBackColor = true;
-            this.buttonIPEDVerify.Click += new System.EventHandler(this.buttonIPEDVerify_Click);
+            this.buttonGeneralVerify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonGeneralVerify.Location = new System.Drawing.Point(316, 6);
+            this.buttonGeneralVerify.Name = "buttonGeneralVerify";
+            this.buttonGeneralVerify.Size = new System.Drawing.Size(120, 40);
+            this.buttonGeneralVerify.TabIndex = 0;
+            this.buttonGeneralVerify.Text = "&Run Verifications";
+            this.buttonGeneralVerify.UseVisualStyleBackColor = true;
+            this.buttonGeneralVerify.Click += new System.EventHandler(this.buttonGeneralVerify_Click);
             // 
             // comboBoxYearTerm
             // 
@@ -193,9 +200,9 @@
             // 
             this.backgroundWorkerAKIS.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerAKIS_DoWork);
             // 
-            // backgroundWorkerIPED
+            // backgroundWorkerGeneral
             // 
-            this.backgroundWorkerIPED.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerIPED_DoWork);
+            this.backgroundWorkerGeneral.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerGeneral_DoWork);
             // 
             // labelYearTerm
             // 
@@ -207,6 +214,42 @@
             this.labelYearTerm.TabIndex = 4;
             this.labelYearTerm.Text = "Year/Term Selection:";
             // 
+            // progressBarAKIS
+            // 
+            this.progressBarAKIS.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.progressBarAKIS.Location = new System.Drawing.Point(156, 200);
+            this.progressBarAKIS.Name = "progressBarAKIS";
+            this.progressBarAKIS.Size = new System.Drawing.Size(120, 23);
+            this.progressBarAKIS.TabIndex = 3;
+            // 
+            // labelAKISRun
+            // 
+            this.labelAKISRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelAKISRun.AutoSize = true;
+            this.labelAKISRun.Location = new System.Drawing.Point(135, 184);
+            this.labelAKISRun.Name = "labelAKISRun";
+            this.labelAKISRun.Size = new System.Drawing.Size(170, 13);
+            this.labelAKISRun.TabIndex = 4;
+            this.labelAKISRun.Text = "Please wait while running reports...";
+            // 
+            // labelGeneralRun
+            // 
+            this.labelGeneralRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelGeneralRun.AutoSize = true;
+            this.labelGeneralRun.Location = new System.Drawing.Point(135, 184);
+            this.labelGeneralRun.Name = "labelGeneralRun";
+            this.labelGeneralRun.Size = new System.Drawing.Size(170, 13);
+            this.labelGeneralRun.TabIndex = 7;
+            this.labelGeneralRun.Text = "Please wait while running reports...";
+            // 
+            // progressBarGeneral
+            // 
+            this.progressBarGeneral.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.progressBarGeneral.Location = new System.Drawing.Point(156, 200);
+            this.progressBarGeneral.Name = "progressBarGeneral";
+            this.progressBarGeneral.Size = new System.Drawing.Size(120, 23);
+            this.progressBarGeneral.TabIndex = 6;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,16 +259,18 @@
             this.Controls.Add(this.comboBoxYearTerm);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindow";
-            this.ShowIcon = false;
             this.Text = "SGU Reporting Tool";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageAKIS.ResumeLayout(false);
+            this.tabPageAKIS.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAKISSpinner)).EndInit();
-            this.tabPageIPED.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIPEDSpinner)).EndInit();
+            this.tabPageGeneral.ResumeLayout(false);
+            this.tabPageGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGeneralSpinner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,16 +281,20 @@
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageAKIS;
         private System.Windows.Forms.Button buttonAKISVerify;
-        private System.Windows.Forms.TabPage tabPageIPED;
-        private System.Windows.Forms.Button buttonIPEDVerify;
+        private System.Windows.Forms.TabPage tabPageGeneral;
+        private System.Windows.Forms.Button buttonGeneralVerify;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAKIS;
         private System.Windows.Forms.PictureBox pictureBoxAKISSpinner;
-        private System.Windows.Forms.PictureBox pictureBoxIPEDSpinner;
+        private System.Windows.Forms.PictureBox pictureBoxGeneralSpinner;
         private System.ComponentModel.BackgroundWorker backgroundWorkerAKIS;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerIPED;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerGeneral;
         private System.Windows.Forms.ComboBox comboBoxYearTerm;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelIPED;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelGeneral;
         private System.Windows.Forms.Label labelYearTerm;
+        private System.Windows.Forms.Label labelAKISRun;
+        private System.Windows.Forms.ProgressBar progressBarAKIS;
+        private System.Windows.Forms.Label labelGeneralRun;
+        private System.Windows.Forms.ProgressBar progressBarGeneral;
     }
 }
 

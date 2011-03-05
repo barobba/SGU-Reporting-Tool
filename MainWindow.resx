@@ -120,7 +120,50 @@
   <metadata name="backgroundWorkerAKIS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="backgroundWorkerIPED.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="backgroundWorkerGeneral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>187, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEACACoCAAAFgAAACgAAAAgAAAAQAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAQQEAAECiwAABoAAAAIPgAAHAAABAo+AAAeAAAEDD4ABgw+AA4QLgAIDD4ABg46AA4SLgAIDj4AHBg
+        WAAoOPgAIEjQAChA+AAwQPgAOED4AACQAAA4UNgAMEj4AChokAA4SPgAAJgAADhgsAAgeGgAMHhoAChw
+        iAA4UPAAOFD4ABCQMAAAoAAAQFD4ADhY4ABIUPgAMIBgAEBY6AAAqAAASGjAAEhY+ABQWPgAALAAAFBg
+        +ABYYPgAALgAAFho+ABgaPgAAMAAAGh40AAIwAAAYHDwAGhw8ABgcPgAaHD4AGB44ABwcPgAaHjgAADI
+        AABogNAACMgAAECwQABoePAAcHjwAGh4+ABwePgAaIDgAHCA4AAA0AAAcIDoAHiA6ACIgOgAKMgYAHCA
+        +AB4gPgAgIjoAGigoAAoyDAAINAYAADYCABwoKAAeKCgAICI8ABIwEgAANgQAEi4aACAiPgAiIj4AIiQ
+        4ACwoKAAQMhAAEjIQABguHAAeKigAGDAWAAY2CAAiJD4AJCQ+ACImOgAgLCgAEjQSAB4wHAAiKDYAJCg
+        2ABQ0FAAMNhAAJCY+ABA0FgAmJj4AEjYQACgoOAAcMhwAJCo2ACgqNgAiMCQAJig+ACgoPgAWNhYABjo
+        OACoqPAAcNCAAKCo+ADAuLgAqKj4AMi4uACosOAAKOhQAMi4wACQyKAAMOhYAGDgaACwsPAAgNCYAKiw
+        +ACwsPgAkNCYAMjAwADAuOgAYOhoALi48ABg6HAAsLj4ALi4+AA48GgAuMDgAGDoeABo6HgAOPBwAGDo
+        gABA8HAASPBwAHjogADAwPAAUPB4ALjA+ADAwPgAWPCAANDQ0ACI6JgAyMjwAHDwiABQ+HgAwMj4ANDQ
+        2ADIyPgAcPCQAFD4gADI0OAAmOigAHjwkABQ+IgAWPiIANDQ6ACA8JgA2NDoAGD4kABo+JAAyND4ANjY
+        2ADQ0PgA4NjYAGD4mABo+JgAcPiYAHj4mADY2OgAcPigAHj4oACg8LAAgPigAHD4qAB4+KgA4ODYANjY
+        +ADo4NgAiPioAODg4ACA+LAAiPiwAODg8ACg+LgA4OD4AJj4wACg+MAA6OjgAOjo6ADw6OgA6Oj4APDw
+        8AD48PAA2PjgAPDw+ADg+OgA8PjwAPD4+AD4+PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ
+        2dnZ2dnZ2dnZ2dnZ2dnZ2dkGFBQZFBQGAtnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkEFCsnJyEhISEUAgAJ
+        IyYmHhgL2dnZ2dnZ2dnZ2dnZ2SErKysnJycnJyEnJTI1MCwiEggB2dnZ2dnZ2dnZ2dknLi4uLlxbKysr
+        JychHDlBNiwkEQwO2dnZ2dnZ2dnZGS4xMTFp2NhlLi4rKycgKDAvLCISRMNa2dnZ2dnZ2dknOzs7dtjY
+        2Nh2MTEuKycaLCkiGA1DwXvZ2dnZ2dnZ2TFQVYvY2NjW2NiDRT0zLhsiIhYPBTrBfdnZ2dnZ2dnZTneS
+        2NjYlZLY2NiYYE9JFxMSDQcDOMGA2dnZ2dnZ2dlsgpfT2KZ/f6HW2Nifam4dCggHBwU6wYnZ2dnZ2dnZ
+        2VSikJ24lJaWkKrX2NaNVhAfLC82KjrBidnZ2dnZ2dnZPqasq6erq6unmr7VrpNdOEtKQkEtRMGJ2dnZ
+        2dnZ2dnZX8e3tre3t7exsLG5eTxXS0tCQnpywYnZ2dnZ2dnZ2dnZcMvGv7+/wLu8xIVNU1dXS0ubqKSz
+        idnZ2dnZ2dnZ2dnZZqnMy8vLyb1zUWJhYVdXYX6zs7OJ2dnZ2dnZ2dnZ2dnZ2VKBTYhkXmNra2tiYWE3
+        aMGzs57Z2dnZ2dnZ2dnZ2dnZSBU0cXV1dXR0a2tiYjZntbOzxbPZ2dnZ2dnZ2dnZ2dlZWIeHfHx6dXV0
+        bWttNWjBs8XFzrXZ2dnZ2dnZ2dnZ2W+ljoeHhnx8enV0bW0/aMHFxcXOztnZ2dnZ2dnZ2dnZirSPj46H
+        h4Z8enV1dUBowcXFzs7O2dnZ2dnZ2dnZ2dmttJyPj4+Hh4Z8fHp8RmjNxc7O0c/Z2dnZ2dnZ2dnZ2a3C
+        nJycj4+Oh4eGeHhHaM3Ozs7R0dnZ2dnZ2dnZ2dnZr8qlpZycnI+MhISEhEyRzc7O0dHR2dnZ2dnZ2dnZ
+        2dm6yrKlpaOZmYyMjIyMoM7OztHR2NLZ2dnZ2dnZ2dnZ2brQtLS0tLS0wsrQ0NHRzs7R0dHY2NnZ2dnZ
+        2dnZ2dnZutTQ0NTR0c7OxcXFxc7O0dHR2NjY2dnZ2dnZ2dnZ2dnIzs3Fs7Ozs7OzxcXOztHR0djY2NjZ
+        2dnZ2dnZ2dnZ2dGes7Ozs7OzxcXFzs7O0dHY2NjY2NnZ2dnZ2dnZ2dnZ0dHOzs7Ozs7OztHR2NjY2NjY
+        2NjY2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnPz9HR0rXZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ
+        2dnZ2dnZ2dnZ2f///////////gH///gAAP/4AAB/8AAAP+AAAB/gAAAf4AAAH+AAAB/gAAAf4AAAH+AA
+        AB/wAAAf+AAAH/wAAB//AAAf/wAAD/8AAAf/AAAH/wAAB/8AAAf/AAAH/wAAB/8AAAf/AAAH/wAAB/8A
+        AAf/AAAH/wAAB////gf/////
+</value>
+  </data>
 </root>

@@ -38,9 +38,9 @@ namespace SGU_Reporting_Tool
             // Figure out info maker program executable location.
             RegistryKey rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
             rk = rk.OpenSubKey(InfoMakerExecKey);
-            object rkValue = rk.GetValue("");
-            
-            if (rkValue != null)
+            object rkValue = null;
+
+            if (rk != null && (rkValue = rk.GetValue("")) != null)
             {
                 _infoMakerExecLoc = rkValue.ToString();
             }
@@ -98,7 +98,7 @@ namespace SGU_Reporting_Tool
             return DialogResult.OK;
         }
 
-        public static void RunVerify(string domainCode, string yearTermCode, TableLayoutPanel tablePanel)
+        public static void RunVerify(string domainCode, string yearTermCode, TableLayoutPanel tablePanel, ProgressBar progressBar)
         {
             // Prep report factory for correct student totals.
             ReportFactory factory = new ReportFactory();
@@ -143,6 +143,8 @@ namespace SGU_Reporting_Tool
 
             reader.Close();
 
+            progressBar.Invoke(new MethodInvoker(delegate { progressBar.Value = 10; }));
+
             int row = 0;
             if (reportItems.Count > 0)
             {
@@ -159,6 +161,8 @@ namespace SGU_Reporting_Tool
                         tablePanel.Controls.Add(rowItem.ControlAt(3), 3, row);
                     }));
                     row++;
+
+                    progressBar.Invoke(new MethodInvoker(delegate { progressBar.Value = 10 + ((90 / reportItems.Count) * row); }));
                 }
             }
             else
